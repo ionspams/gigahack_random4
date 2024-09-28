@@ -86,12 +86,16 @@ def chat_based_version():
     </script>
     """, unsafe_allow_html=True)
 
+    # Input field for chat
     user_input = st.text_input("Type your message here:", key="user_input")
 
+    # If a message is entered, append it to the chat history
     if st.button("Send"):
         if user_input:
             # Add user message to chat history
             st.session_state['chat_history'].append(f"You: {user_input}")
+            
+            # Perform sentiment detection and answer query
             sentiment_label, sentiment_score = detect_sentiment(user_input)
             if sentiment_label == "NEGATIVE" and sentiment_score > 0.7:
                 response = "It seems you're frustrated. Escalating to a human agent..."
@@ -100,9 +104,12 @@ def chat_based_version():
             
             # Add assistant response to chat history
             st.session_state['chat_history'].append(f"Assistant: {response}")
-        
-        # Clear input field after sending
-        st.experimental_rerun()
+
+        # Clear the input box after sending
+        st.session_state['user_input'] = ""
+
+    # Display updated chat history
+    display_chat()
 
 def main():
     # Sidebar for version selection
