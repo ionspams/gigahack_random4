@@ -33,6 +33,7 @@ def display_chat():
     for message in st.session_state['chat_history']:
         st.write(message)
 
+# Current form-based version
 def form_based_version():
     st.title("Telecom Virtual Assistant - Form Version")
     st.write("Hello! How can I assist you today?")
@@ -56,6 +57,7 @@ def form_based_version():
     if st.button("Submit Feedback"):
         st.write("Thank you for your feedback!")
 
+# New chat-based version with voice-to-text
 def chat_based_version():
     st.title("Telecom Virtual Assistant - Chat Interface")
 
@@ -110,6 +112,7 @@ def main():
         ('Form-Based Prototype', 'Chat Interface with Voice-to-Text')
     )
 
+    # Switch between the versions based on sidebar selection
     if version == 'Form-Based Prototype':
         form_based_version()
     elif version == 'Chat Interface with Voice-to-Text':
